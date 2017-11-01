@@ -42,6 +42,7 @@ class AromType extends Component{
 				<ul className='aromStuct'>
 					{aromMenuStruct}
 				</ul>
+				<div className="clear"></div>
 				<Route path="/catalogue/:type/:struct?" component={AromItemInfo} />	
 			</section>
 		)
