@@ -19,7 +19,8 @@ time, mark, audio, video {
   vertical-align: baseline; }
 
 html, body{
-  height: 100%; }
+  height: 100%; 
+  min-width: 1200px;}
 
 * {
   -moz-box-sizing: border-box;
@@ -158,6 +159,7 @@ h6, .h6 {
 
 header {
   width: 100%;
+  min-width: 1200px;
   height: 390px;
   background: url(../img/backGroundHeader.jpg); }
 
@@ -291,16 +293,18 @@ header .logo h6 {
   height: 100%;
   text-decoration: none; } 
 
-.imgMenuItem a div{
-  position: relative;
-  width: 100%;
-  height: 65px; }
+.imgMenuItem .outer{
+  width: 120px;
+  height: 65px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center; }
+
+.imgMenuItem .teacoffee .outer{
+  padding:0 30px;
+}
 
 .imgMenuItem a p{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   font-family: 'Times New Roman', Times, serif;
   font-size: 16px;
   line-height: 1.3rem;
@@ -322,7 +326,7 @@ header .logo h6 {
 .imgMenuItem .spread{
   background-image: url('../img/imgMenu/spred.png');
   background-repeat: no-repeat;
-  background-position: center 15px; }
+  background-position: center 10px; }
 
 .imgMenuItem .spread hr,
 .info hr.spread{

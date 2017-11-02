@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 function ImgMenuItem(props){
 	const {item} = props
 
-	const body = <Link to={`/catalogue${item.url}`} className={item.classes}><hr /><div><p>{item.title}</p></div></Link>
+	const body = <Link to={`/catalogue${item.url}`} className={item.classes}><hr /><div className="outer"><p>{item.title}</p></div></Link>
 
 	return(
 		<div>{body}</div>
