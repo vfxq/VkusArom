@@ -4,6 +4,8 @@ import MenuItem from './MenuItem'
 import Phone from './Phone'
 import Loader from '../Loader'
 import ErrorCmp from '../ErrorCmp'
+import {MENU} from '../../config.js'
+import {errorSelector, loadMenu, entitiesDataSelector, loadingSelector, loadedSelector} from '../../ducks/menu'
 
 class Menu extends Component {
 	
@@ -12,6 +14,7 @@ class Menu extends Component {
 	}
 
 	componentDidMount(){
+		this.props.loadMenu(MENU);
 		window.addEventListener('scroll', this.handleScroll);
 	}
 
@@ -51,10 +54,11 @@ class Menu extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		menu: state.menu.entities.valueSeq().toArray(),
-		loading: state.menu.loading,
-		error: state.menu.error
+		menu: entitiesDataSelector(state),
+		loading: loadingSelector(state),
+		loaded: loadedSelector(state),
+		error: errorSelector(state)
 	}
 }
 
-export default connect(mapStateToProps)(Menu)
+export default connect(mapStateToProps, {loadMenu})(Menu)

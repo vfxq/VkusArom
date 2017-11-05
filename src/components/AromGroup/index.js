@@ -25,8 +25,8 @@ class AromType extends Component{
 	render(){
 		const {aromGroup, aromCat, aromCatName, loading, error, match} = this.props
 
-		if(loading) return (<section className="info"><Loader /></section>)
 		if (error) return (<section className="info"><ErrorCmp error={error} /></section>)	
+		if(loading) return (<section className="info"><Loader /></section>)
 
 		const aromMenuStruct = aromGroup.map(aromItem => <li key={aromItem.id}>
 																												<AromTypeNavItem aromItem={aromItem} aromCat={aromCat} match={match} />

@@ -1,6 +1,7 @@
 import {appName} from '../config'
 import {Map, Record} from 'immutable'
 import {put, call, takeEvery} from 'redux-saga/effects'
+import {createSelector} from 'reselect'
 import axios from 'axios'
 import {arrToMap} from './utils'
  
@@ -27,8 +28,9 @@ const MenuModel = Record({
 })
 
 const ReducerState = Record({
-	entities: Map(),
-	loading: true,
+	entities: new Map(),
+	loaded: false,
+	loading: false,
 	error: null
 })
 
@@ -37,19 +39,31 @@ export default (state = new ReducerState(), action) => {
 
 	switch (type) {
 
+		case LOAD_MENU_START:
+			return state
+							.set('loading', true)
 		case LOAD_MENU_SUCCESS:
 		 	return state
-		 					.setIn(['loading'], false)
-		 					.mergeIn(['entities'], arrToMap(payload.response.data.items, MenuModel))
+		 					.set('loading', false)
+		 					.set('entities', arrToMap(payload.response.data.items, MenuModel))
 			
 		case LOAD_MENU_ERROR:
 			return state
-							.setIn(['loading'], false)
-							.setIn(['error'], error)
+							.set('loading', false)
+							.set('error', error)
 	}
 	
 	return state
 }
+
+// Selectors
+
+export const stateSelector = state => state[moduleName]
+export const entitiesSelector = createSelector(stateSelector, state => state.entities)
+export const loadingSelector = createSelector(stateSelector, state => state.loading)
+export const loadedSelector = createSelector(stateSelector, state => state.loaded)
+export const errorSelector = createSelector(stateSelector, state => state.error)
+export const entitiesDataSelector = createSelector(entitiesSelector, entities => entities.valueSeq().toArray())
 
 // Action Creators
 
@@ -60,7 +74,7 @@ export function loadMenu(id){
 	}
 }
 
-//Sagas
+// Sagas
 
 export function * menuSaga(action){
 

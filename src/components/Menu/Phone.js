@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Loader from '../Loader'
 import Error from '../Error'
+import {errorSelector, entitiesSelector, loadingSelector, loadedSelector} from '../../ducks/contacts'
 
 class Phone extends Component{
 	render(){
@@ -10,8 +11,8 @@ class Phone extends Component{
 
 		if (loading || !contacts) return <Loader />
 		if (error) return <Error error={error} />		
-		
-		const phone = contacts.phone1
+
+		const phone = contacts.acf.phone1
 
 		return(
 			<p><i className="fa fa-phone green_light" />
@@ -22,10 +23,11 @@ class Phone extends Component{
 }
 
 const mapStateToProps = (state) => {
+
 	return {
-		contacts: state.contacts.entities.acf, 
-		loading: state.contacts.loading,
-		error: state.contacts.error
+		contacts: entitiesSelector(state), 
+		loading: loadingSelector(state),
+		error: errorSelector(state)
 	}
 }
 

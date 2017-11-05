@@ -70,6 +70,8 @@ export function loadAromType(category, aromCat){
 export function *  loadAromGroupCatSaga(action){
 	const aromCat = action.payload.aromCat
 	const aromCatName = action.payload.response.data[0].name
+
+	console.log('Aroms: ', aromCat, aromCatName)
 	
 	try {
 		const response = yield call(axios.get, `/wp-json/wp/v2/posts?categories=${ action.payload.response.data[0].id}`)

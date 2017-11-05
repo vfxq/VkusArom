@@ -11,9 +11,8 @@ import Assortment from './Assortment'
 import Distribs from './Distribs'
 import Vendors from './Vendors'
 import Footer from './Footer'
-import {loadMenu} from '../ducks/menu'
 import {loadContacts} from '../ducks/contacts'
-import {MENU, CONTACTS} from '../config.js'
+import {CONTACTS} from '../config.js'
 import history from '../history'
 import AromGroup from './AromGroup'
 import NotFound from './NotFound'
@@ -21,7 +20,6 @@ import NotFound from './NotFound'
 class App extends Component {
 
 	componentDidMount(){
-		this.props.loadMenu(MENU)
 		this.props.loadContacts(CONTACTS)
 	}
 	
@@ -52,4 +50,4 @@ class App extends Component {
 	}
 }
 
-export default connect(null, {loadMenu, loadContacts})(App)
+export default connect(null, {loadContacts})(App)
