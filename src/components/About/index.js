@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {loadAbout} from '../../ducks/about'
+import {loadAbout, loadingSelector, entitiesSelector, errorSelector, loadedSelector } from '../../ducks/about'
 import Loader from '../Loader'
 import renderHTML from 'react-render-html'
 import ErrorCmp from '../ErrorCmp'
@@ -13,9 +13,8 @@ class About extends Component{
 	}
 
 	render(){
-
 		const {entities, loading, error} = this.props
-
+		
 		if (loading) return (<section className="about"><div className="white"><Loader /></div></section>)
 		if (error) return (<section className="about"><ErrorCmp error={error} /></section>)														
 	
@@ -38,9 +37,9 @@ class About extends Component{
 const mapStateToProps = (state) => {
 
 	return {
-		entities: state.about.entities,
-		loading: state.about.loading,
-		error: state.about.error
+		entities: entitiesSelector(state),
+		loading: loadingSelector(state),
+		error: errorSelector(state)
 	}
 }
 

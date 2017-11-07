@@ -50,8 +50,6 @@ export const entitiesSelector = createSelector(stateSelector, state => state.ent
 export const loadingSelector = createSelector(stateSelector, state => state.loading)
 export const loadedSelector = createSelector(stateSelector, state => state.loaded)
 export const errorSelector = createSelector(stateSelector, state => state.error)
-// export const entitiesDataSelector = createSelector(entitiesSelector, entities => entities.valueSeq().toArray())
-
 // Action Creators
 
 export function loadContacts(id){

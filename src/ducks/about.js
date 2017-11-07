@@ -1,5 +1,6 @@
 import {appName} from '../config'
 import {Map, Record} from 'immutable'
+import {createSelector} from 'reselect'
 import {put, call, takeEvery} from 'redux-saga/effects'
 import axios from 'axios'
  
@@ -16,7 +17,7 @@ export const LOAD_ABOUT_ERROR = `${prefix}/LOAD_ABOUT_ERROR`
 // Reducer
 
 const ReducerState = Record({
-	entities: Map(),
+	entities: new Map(),
 	error: null,
 	loading: true
 })
@@ -25,20 +26,29 @@ export default function reducer(state = new ReducerState(), action) {
 	const {type, payload} = action
 
 	switch(type){
+
 		case LOAD_ABOUT_SUCCESS:
 	 		return state
-	 						.setIn(['entities'], payload.response)
-	 		 				.setIn(['loading'], false)
+	 						.set('entities', payload.response)
+	 		 				.set('loading', false)
 	 			
 		case LOAD_ABOUT_ERROR:
 	 		return state
-	 						.setIn(['error'], payload.error)
-	 						.setIn(['loading'], false)
+	 						.set('error', payload.error)
+	 						.set('loading', false)
 	}
 
 	return state
 }
 
+// Selectors
+
+export const stateSelector = state => state[moduleName]
+export const entitiesSelector = createSelector(stateSelector, state => state.entities)
+export const loadingSelector = createSelector(stateSelector, state => state.loading)
+export const loadedSelector = createSelector(stateSelector, state => state.loaded)
+export const errorSelector = createSelector(stateSelector, state => state.error)
+export const entitiesDataSelector = createSelector(entitiesSelector, entities => entities.data)
 
 // Action Creators
 

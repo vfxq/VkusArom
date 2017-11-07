@@ -1,4 +1,5 @@
 import {appName} from '../config'
+import {createSelector} from 'reselect'
 import {OrderedSet, Record} from 'immutable'
 import {put, call, takeEvery} from 'redux-saga/effects'
 import axios from 'axios'
@@ -35,17 +36,24 @@ export default function reducer(state = new ReducerState(), action) {
 	switch(type){
 		case LOAD_DISTRIBS_SUCCESS:
 	 		return state
-	 						.setIn(['entities'], arrToSet(payload.response.data, DistribsModel))
-	 		 				.setIn(['loading'], false)
+	 						.set('entities', arrToSet(payload.response.data, DistribsModel))
+	 		 				.set('loading', false)
 	 			
 		case LOAD_DISTRIBS_ERROR:
 	 		return state
-	 						.setIn(['error'], payload.error)
-	 						.setIn(['loading'], false)
+	 						.set('error', payload.error)
+	 						.set('loading', false)
 	}
 
 	return state
 }
+
+// Selectors
+
+export const stateSelector = state => state[moduleName]
+export const entitiesSelector = createSelector(stateSelector, state => state.entities)
+export const loadingSelector = createSelector(stateSelector, state => state.loading)
+export const errorSelector = createSelector(stateSelector, state => state.error)
 
 
 // Action Creators

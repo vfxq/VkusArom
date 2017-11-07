@@ -43,11 +43,23 @@ class Menu extends Component {
 	}
 
 	handleScroll = ev => {
-		var scrolled = window.pageYOffset || document.documentElement.scrollTop;
+		const scrolled = window.pageYOffset || document.documentElement.scrollTop;
 
-		this.setState({
-			class: scrolled < 215 ? 'normalTop' : 'fixedTop'
-		})
+		if (((scrolled < 215) && (this.state.class === 'normalTop')) ||
+			((scrolled > 215) && (this.state.class === 'fixedTop'))) return
+
+		if ((scrolled > 215) && (this.state.class === 'normalTop')) {
+			this.setState({
+			 	class: 'fixedTop'
+			})
+		}
+
+		if ((scrolled < 215) && (this.state.class === 'fixedTop')) {
+			this.setState({
+			 	class: 'normalTop'
+			})
+		}
+
 	}
 }
 

@@ -6,7 +6,7 @@ import ErrorCmp from '../ErrorCmp'
 import DistribItem from './DistribItem'
 import DistribList from './DistribList'
 import DistribItemInfo from './DistribItemInfo'
-import {loadDistribs} from '../../ducks/distribs'
+import {loadDistribs, entitiesSelector, loadingSelector, errorSelector} from '../../ducks/distribs'
 import { DISTRIBS } from '../../config'
 
 class Distribs extends Component{
@@ -21,6 +21,8 @@ class Distribs extends Component{
 
 	render(){
 		const {distribs, loading, error, contacts} = this.props
+
+		console.log('rerendering')
 
 		if (loading) return (<section className="about"><div className="white"><Loader /></div></section>)
 		if (error) return (<section className="about"><ErrorCmp error={error} /></section>)	
@@ -73,9 +75,9 @@ class Distribs extends Component{
 const mapStateToProps = state => {
 	return {
 		contacts: state.contacts.entities,
-		distribs: state.distribs.entities,
-		loading: state.distribs.loading,
-		error: state.distribs.error
+		distribs: entitiesSelector(state),
+		loading: loadingSelector(state),
+		error: errorSelector(state)
 	}
 }
 
