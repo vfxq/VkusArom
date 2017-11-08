@@ -11,11 +11,11 @@ import Assortment from './Assortment'
 import Distribs from './Distribs'
 import Vendors from './Vendors'
 import Footer from './Footer'
+import NotFound from './NotFound/index.js'
 import {loadContacts} from '../ducks/contacts'
 import {CONTACTS} from '../config.js'
 import history from '../history'
 import AromGroup from './AromGroup'
-import NotFound from './NotFound'
 
 class App extends Component {
 
@@ -42,6 +42,7 @@ class App extends Component {
 						<Route path="/distribs" component={Distribs} exact/>
 						<Route path="/vendors" component={Vendors} exact/>
 						<Route path="/contacts" component={Contacts} exact/>	
+						<Route path="*" component={NotFound} />
 					</div>					
 				</ConnectedRouter>
 				<Footer />

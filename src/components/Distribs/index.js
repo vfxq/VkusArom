@@ -22,8 +22,6 @@ class Distribs extends Component{
 	render(){
 		const {distribs, loading, error, contacts} = this.props
 
-		console.log('rerendering')
-
 		if (loading) return (<section className="about"><div className="white"><Loader /></div></section>)
 		if (error) return (<section className="about"><ErrorCmp error={error} /></section>)	
 
