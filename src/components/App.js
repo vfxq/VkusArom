@@ -43,7 +43,7 @@ class App extends Component {
 						<Route path="/distribs" component={Distribs} exact/>
 						<Route path="/vendors" component={Vendors} exact/>
 						<Route path="/contacts" component={Contacts} exact/>	
-						<Route path="*" component={Component404} />
+						{/*<Route path="*" component={Component404} />*/}
 					</div>					
 				</ConnectedRouter>
 				<Footer />
