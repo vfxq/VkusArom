@@ -41,12 +41,11 @@ const afterSubmit = (result, dispatch) => {
 	dispatch(reset('contacts'))
 }
 
-export default 	reduxForm({
-														form: 'contacts',
-														onSubmitSuccess: afterSubmit,
-															
-													})
-													(ContactForm)
+export default reduxForm({
+													form: 'contacts',
+													onSubmitSuccess: afterSubmit
+												})
+												(ContactForm)
 												
 
 

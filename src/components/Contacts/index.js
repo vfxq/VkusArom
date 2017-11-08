@@ -4,7 +4,7 @@ import YandexMap from './yandexMaps'
 import ContactForm from './ContactForm'
 import scrollToElement from 'scroll-to-element'
 import Loader from '../Loader'
-import {sendForm} from '../../AC'
+import {sendForm} from '../../ducks/form'
 
 
 class Contacts extends Component{

@@ -4,11 +4,9 @@ function RenderedField(props){
 	
 	const {input, textarea, label, type, placeholder, meta: {touched, error, warning}} = props
 	
-	const body = input.name !== "message" ? <input {...input} placeholder={placeholder} type={type} /> 
-																		 		:	<textarea {...input} placeholder={placeholder} type={type} /> 
-
-
-	// console.log("input: ", input.value)
+	const body = input.name !== "message" ? 
+																		<input {...input} placeholder={placeholder} type={type} /> 
+																	:	<textarea {...input} placeholder={placeholder} type={type} /> 
 
 	return(
 		<div>
