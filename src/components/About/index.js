@@ -9,7 +9,10 @@ import {ABOUT} from '../../config'
 class About extends Component{
 
 	componentDidMount(){
-		this.props.loadAbout(ABOUT)
+
+		console.log('Did mount: ', this.props.loaded)
+
+		if(!this.props.loaded) this.props.loadAbout(ABOUT)
 	}
 
 	render(){
@@ -39,6 +42,7 @@ const mapStateToProps = (state) => {
 	return {
 		entities: entitiesSelector(state),
 		loading: loadingSelector(state),
+		loaded: loadedSelector(state),
 		error: errorSelector(state)
 	}
 }

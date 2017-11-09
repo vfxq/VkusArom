@@ -42,10 +42,12 @@ export default (state = new ReducerState(), action) => {
 		case LOAD_MENU_START:
 			return state
 							.set('loading', true)
+							.set('loaded', false)
 		case LOAD_MENU_SUCCESS:
 		 	return state
 		 					.set('loading', false)
 		 					.set('entities', arrToMap(payload.response.data.items, MenuModel))
+		 					.set('loaded', true)
 			
 		case LOAD_MENU_ERROR:
 			return state

@@ -26,10 +26,31 @@ class App extends Component {
 	
 	render(){
 
+		//TODO переделать Rоute на агрегирование компонентов
+		// добавить обработку 404 
+
+						// <Route component={Component404} />
+
 		return (
 			<div>
 				<ConnectedRouter history={history}>
 					<div>
+						<Route path="/" component={Menu}  />
+						<Route path="/" component={ImgMenu}  exact/>
+						<Route path="/" component={About} exact/>
+						<Route path="/" component={News} exact/>
+						<Route path="/news" component={ImgMenu} exact/>
+						<Route path="/news" component={About} exact/>
+						<Route path="/news" component={News} exact/>
+						<Route path="/catalogue" component={ImgMenu } exact/>
+						<Route path="/catalogue/:type" component={AromGroup} />
+						<Route path="/assortment" component={Assortment} exact/>
+						<Route path="/distribs" component={Distribs} exact/>
+						<Route path="/vendors" component={Vendors} exact/>
+						<Route path="/contacts" component={Contacts} exact/>
+
+	{/*
+						
 						<Route path="/" component={Menu} />
 						<Route path="/" component={ImgMenu} exact/>
 						<Route path="/" component={About} exact/>
@@ -43,7 +64,7 @@ class App extends Component {
 						<Route path="/distribs" component={Distribs} exact/>
 						<Route path="/vendors" component={Vendors} exact/>
 						<Route path="/contacts" component={Contacts} exact/>	
-						{/*<Route path="*" component={Component404} />*/}
+						*/}
 					</div>					
 				</ConnectedRouter>
 				<Footer />

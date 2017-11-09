@@ -19,7 +19,8 @@ export const LOAD_ABOUT_ERROR = `${prefix}/LOAD_ABOUT_ERROR`
 const ReducerState = Record({
 	entities: new Map(),
 	error: null,
-	loading: true
+	loading: true,
+	loaded: false
 })
 
 export default function reducer(state = new ReducerState(), action) {
@@ -31,11 +32,13 @@ export default function reducer(state = new ReducerState(), action) {
 	 		return state
 	 						.set('entities', payload.response)
 	 		 				.set('loading', false)
+	 		 				.set('loaded', true)
 	 			
 		case LOAD_ABOUT_ERROR:
 	 		return state
 	 						.set('error', payload.error)
 	 						.set('loading', false)
+	 		 				.set('loaded', false)
 	}
 
 	return state
@@ -53,6 +56,7 @@ export const entitiesDataSelector = createSelector(entitiesSelector, entities =>
 // Action Creators
 
 export function loadAbout(id){
+	console.log('Did mount')
 	return {
 		type: LOAD_ABOUT_START,
 		payload: {id}

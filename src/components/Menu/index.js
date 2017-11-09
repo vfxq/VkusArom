@@ -14,12 +14,13 @@ class Menu extends Component {
 	}
 
 	componentDidMount(){
-		this.props.loadMenu(MENU);
-		window.addEventListener('scroll', this.handleScroll);
+		if(!this.props.loaded) this.props.loadMenu(MENU)  
+		
+		window.addEventListener('scroll', this.handleScroll)
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener('scroll', this.handleScroll);
+		window.removeEventListener('scroll', this.handleScroll)
 	}
 
 	render(){
