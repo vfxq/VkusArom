@@ -16,6 +16,13 @@ class News extends Component{
 		var elem = document.querySelector('body');
 		this.props.location.pathname =='/news' ? scrollToElement(ReactDOM.findDOMNode(this)) : scrollToElement(elem)
 	}
+	
+	componentDidUpdate(prevProps){
+	 	if(this.props.location !== prevProps.location) {
+			const elem = document.querySelector('body');
+			this.props.location.pathname =='/news' ? scrollToElement(ReactDOM.findDOMNode(this)) : scrollToElement(elem)
+		}
+	}
 
 	render(){
 	

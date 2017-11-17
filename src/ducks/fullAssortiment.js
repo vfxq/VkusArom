@@ -1,6 +1,7 @@
 import {appName} from '../config'
 import {Map, Record} from 'immutable'
 import {put, call, takeEvery} from 'redux-saga/effects'
+import {createSelector} from 'reselect'
 import axios from 'axios'
  
 
@@ -18,6 +19,7 @@ export const LOAD_FULL_ASSORTIMENT_ERROR = `${prefix}/LOAD_FULL_ASSORTIMENT_ERRO
 const ReducerState = Record({
 	entities: Map(),
 	error: null,
+	loaded: false,
 	loading: true
 })
 
@@ -27,18 +29,27 @@ export default function reducer(state = new ReducerState(), action) {
 	switch(type){
 		case LOAD_FULL_ASSORTIMENT_SUCCESS:
 	 		return state
-	 						.setIn(['entities'], payload.response)
-	 		 				.setIn(['loading'], false)
+	 						.set('entities', payload.response)
+	 						.set('loaded', true)
+	 		 				.set('loading', false)
 	 			
 		case LOAD_FULL_ASSORTIMENT_ERROR:	
 	 		return state
-	 						.setIn(['error'], payload.error)
-	 						.setIn(['loading'], false)
+	 						.set('error', payload.error)
+	 						.set('loading', false)
+
 	}
 
 	return state
 }
 
+// Selectors
+
+export const stateSelector = state => state[moduleName]
+export const entitiesSelector = createSelector(stateSelector, state => state.entities)
+export const errorSelector = createSelector(stateSelector, state => state.error) 
+export const loadingSelector = createSelector(stateSelector, state => state.loading)
+export const loadedSelector = createSelector(stateSelector, state => state.loaded)
 
 // Action Creators
 

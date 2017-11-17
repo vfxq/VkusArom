@@ -19,7 +19,8 @@ export const LOAD_CONTACTS_ERROR = `${prefix}/LOAD_CONTACTS_ERROR`
 const ReducerState = Record({
 	entities: Map(),
 	error: null,
-	loading: true
+	loading: true,
+	loaded: false
 })
 
 export default function reducer(state = new ReducerState(), action) {
@@ -32,11 +33,13 @@ export default function reducer(state = new ReducerState(), action) {
 		case LOAD_CONTACTS_SUCCESS:
 	 		return state
 	 						.set('entities', payload.response.data)
+	 						.set('loaded', true)
 	 		 				.set('loading', false)
 	 			
 		case LOAD_CONTACTS_ERROR:	
 	 		return state
 	 						.set('error', payload.error)
+	 						.set('loaded', false)
 	 						.set('loading', false)
 	}
 

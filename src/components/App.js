@@ -4,9 +4,9 @@ import {BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-do
 import {ConnectedRouter} from 'react-router-redux'
 import Menu from './Menu'
 import ImgMenu from './ImgMenu'
-import About from './About'
+// import About from './About'
 import Contacts from './Contacts'
-import News from './News'
+// import News from './News'
 import Assortment from './Assortment'
 import Distribs from './Distribs'
 import Vendors from './Vendors'
@@ -15,8 +15,9 @@ import {loadContacts} from '../ducks/contacts'
 import {CONTACTS} from '../config.js'
 import history from '../history'
 import AromGroup from './AromGroup'
-import Component404 from './Component404'
 import NotFound from './NotFound'
+import RouteRoot from './Routes/Root'
+// import ScrollToTop from './Scrolls/ScrollToTop'
 
 class App extends Component {
 
@@ -24,47 +25,24 @@ class App extends Component {
 		this.props.loadContacts(CONTACTS)
 	}
 	
+						// <ScrollToTop />
 	render(){
-
-		//TODO переделать Rоute на агрегирование компонентов
-		// добавить обработку 404 
-
-						// <Route component={Component404} />
-
 		return (
 			<div>
 				<ConnectedRouter history={history}>
 					<div>
-						<Route path="/" component={Menu}  />
-						<Route path="/" component={ImgMenu}  exact/>
-						<Route path="/" component={About} exact/>
-						<Route path="/" component={News} exact/>
-						<Route path="/news" component={ImgMenu} exact/>
-						<Route path="/news" component={About} exact/>
-						<Route path="/news" component={News} exact/>
-						<Route path="/catalogue" component={ImgMenu } exact/>
-						<Route path="/catalogue/:type" component={AromGroup} />
-						<Route path="/assortment" component={Assortment} exact/>
-						<Route path="/distribs" component={Distribs} exact/>
-						<Route path="/vendors" component={Vendors} exact/>
-						<Route path="/contacts" component={Contacts} exact/>
-
-	{/*
-						
 						<Route path="/" component={Menu} />
-						<Route path="/" component={ImgMenu} exact/>
-						<Route path="/" component={About} exact/>
-						<Route path="/" component={News} exact/>
-						<Route path="/news" component={ImgMenu} exact/>
-						<Route path="/news" component={About} exact/>
-						<Route path="/news" component={News} exact/>
-						<Route path="/catalogue" component={ImgMenu } exact/>
-						<Route path="/catalogue/:type" component={AromGroup} />
-						<Route path="/assortment" component={Assortment} exact/>
-						<Route path="/distribs" component={Distribs} exact/>
-						<Route path="/vendors" component={Vendors} exact/>
-						<Route path="/contacts" component={Contacts} exact/>	
-						*/}
+						<Switch>
+							<Route path="/" component={RouteRoot}  exact/>
+							<Route path="/news" component={RouteRoot} exact />
+							<Route path="/catalogue" component={ImgMenu } exact/>
+							<Route path="/catalogue/:type" component={AromGroup} />
+							<Route path="/assortment" component={Assortment} exact/>
+							<Route path="/distribs" component={Distribs} exact/>
+							<Route path="/vendors" component={Vendors} exact/>
+							<Route path="/contacts" component={Contacts} exact/>
+							<Route path="*" component={NotFound} />
+						</Switch>	
 					</div>					
 				</ConnectedRouter>
 				<Footer />

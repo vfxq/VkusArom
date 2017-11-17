@@ -9,9 +9,6 @@ import {ABOUT} from '../../config'
 class About extends Component{
 
 	componentDidMount(){
-
-		console.log('Did mount: ', this.props.loaded)
-
 		if(!this.props.loaded) this.props.loadAbout(ABOUT)
 	}
 

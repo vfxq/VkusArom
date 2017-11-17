@@ -5,6 +5,7 @@ import ContactForm from './ContactForm'
 import scrollToElement from 'scroll-to-element'
 import Loader from '../Loader'
 import {sendForm} from '../../ducks/form'
+import {loadingSelector} from '../../ducks/contacts'
 
 
 class Contacts extends Component{
@@ -58,7 +59,7 @@ class Contacts extends Component{
 const mapStateToProps = state => {
 	return {
 		contacts: state.contacts.entities,
-		loading: state.contacts.loading,
+		loading: loadingSelector(state),
 		error: state.contacts.error
 	}
 }

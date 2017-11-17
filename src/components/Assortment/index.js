@@ -2,13 +2,16 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Loader from '../Loader'
 import ErrorCmp from '../ErrorCmp'
-import {loadFullAssortiment} from '../../ducks/fullAssortiment'
+import {loadFullAssortiment, entitiesSelector, errorSelector, loadingSelector, loadedSelector} from '../../ducks/fullAssortiment'
 import renderHTML from 'react-render-html'
+import scrollToElement from 'scroll-to-element'
 import {FULLASSORTIMENT} from '../../config'
 
 class Assortment extends Component{
 	componentDidMount(){
-		this.props.loadFullAssortiment(FULLASSORTIMENT)
+		if(!this.props.loaded) this.props.loadFullAssortiment(FULLASSORTIMENT)
+		var elem = document.querySelector('body')
+		scrollToElement(elem)
 	}
 
 	render(){
@@ -31,9 +34,10 @@ class Assortment extends Component{
 
 const mapStateToProps = (state) => {
 	return {
-		fullAssortiment: state.fullAssortiment.entities,
-		error: state.fullAssortiment.error,
-		loading: state.fullAssortiment.loading
+		fullAssortiment: entitiesSelector(state),
+		error: errorSelector(state),
+		loading: loadingSelector(state),
+		loaded: loadedSelector(state)
 	}
 }
 

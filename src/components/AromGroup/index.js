@@ -9,11 +9,14 @@ import {Route, Link, Switch} from 'react-router-dom'
 import renderHTML from 'react-render-html'
 import {CATALOGUE} from '../../config.js'
 import {loadAromType} from '../../ducks/aromGroup'
+import scrollToElement from 'scroll-to-element'
 
 class AromType extends Component{
 
 	componentDidMount(){
 		this.props.loadAromType(CATALOGUE, this.props.match.params.type)
+		var elem = document.querySelector('body')
+		scrollToElement(elem)
 	}
 
 	componentWillReceiveProps(nextProps){

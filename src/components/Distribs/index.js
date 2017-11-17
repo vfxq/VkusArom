@@ -8,11 +8,14 @@ import DistribList from './DistribList'
 import DistribItemInfo from './DistribItemInfo'
 import {loadDistribs, entitiesSelector, loadingSelector, errorSelector} from '../../ducks/distribs'
 import { DISTRIBS } from '../../config'
+import scrollToElement from 'scroll-to-element'
 
 class Distribs extends Component{
 	
 	componentDidMount(){
 		this.props.loadDistribs(DISTRIBS)
+		var elem = document.querySelector('body')
+		scrollToElement(elem)
 	}
 
 	state = {
@@ -22,7 +25,9 @@ class Distribs extends Component{
 	render(){
 		const {distribs, loading, error, contacts} = this.props
 
-		if (loading) return (<section className="about"><div className="white"><Loader /></div></section>)
+		console.log('props: ', this.props)
+
+		if (loading) return (<section className="about"><Loader /></section>)
 		if (error) return (<section className="about"><ErrorCmp error={error} /></section>)	
 
 		const body =  distribs.map(item => 

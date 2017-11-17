@@ -56,7 +56,6 @@ export const entitiesDataSelector = createSelector(entitiesSelector, entities =>
 // Action Creators
 
 export function loadAbout(id){
-	console.log('Did mount')
 	return {
 		type: LOAD_ABOUT_START,
 		payload: {id}
