@@ -10,7 +10,8 @@ import {loadVendors} from '../../ducks/vendors'
 class Vendors extends Component {
 
 	componentDidMount(){
-		this.props.loadVendors(VENDORS)
+		if (!this.props.loaded)	this.props.loadVendors(VENDORS)
+			
 		var elem = document.querySelector('body')
 		scrollToElement(elem)
 	}
@@ -36,6 +37,7 @@ const mapStateToProps = (state) => {
 	return {
 		vendors: state.vendors.entities,
 		error: state.vendors.error,
+		loaded: state.vendors.loaded,
 		loading: state.vendors.loading
 	}
 }

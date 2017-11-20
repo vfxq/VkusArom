@@ -27,6 +27,7 @@ const DistribsModel = Record({
 const ReducerState = Record({
 	entities: OrderedSet([]),
 	error: null,
+	loaded: false,
 	loading: true
 })
 
@@ -37,11 +38,13 @@ export default function reducer(state = new ReducerState(), action) {
 		case LOAD_DISTRIBS_SUCCESS:
 	 		return state
 	 						.set('entities', arrToSet(payload.response.data, DistribsModel))
+	 						.set('loaded', true)
 	 		 				.set('loading', false)
 	 			
 		case LOAD_DISTRIBS_ERROR:
 	 		return state
 	 						.set('error', payload.error)
+	 						.set('loaded', false)
 	 						.set('loading', false)
 	}
 
@@ -53,6 +56,7 @@ export default function reducer(state = new ReducerState(), action) {
 export const stateSelector = state => state[moduleName]
 export const entitiesSelector = createSelector(stateSelector, state => state.entities)
 export const loadingSelector = createSelector(stateSelector, state => state.loading)
+export const loadedSelector = createSelector(stateSelector, state => state.loaded)
 export const errorSelector = createSelector(stateSelector, state => state.error)
 
 

@@ -39,16 +39,16 @@ export default function reducer(state = new ReducerState(), action) {
 	switch(type){
 	 	case LOAD_AROM_GROUP_CAT_SUCCESS:
 	 		return state
-	 						.setIn(['aromCatName'], payload.aromCatName)
-	 						.setIn(['aromCat'], payload.aromCat)
-	 						.setIn(['entities'], arrToMap(payload.response.data, AromTypeModel))
-	 						.setIn(['loading'], false)
+	 						.set('aromCatName', payload.aromCatName)
+	 						.set('aromCat', payload.aromCat)
+	 						.set('entities', arrToMap(payload.response.data, AromTypeModel))
+	 						.set('loading', false)
 		
 		case LOAD_AROM_GROUP_ERROR:
 		console.log('error: ', payload)
 	 		return state
-	 						.setIn(['error'], payload.error)
-	 						.setIn(['loading'], false)
+	 						.set('error', payload.error)
+	 						.set('loading', false)
 	}
 
 	return state

@@ -37,16 +37,16 @@ export default function reducer(state = new ReducerState(), action) {
 	switch(type){
 		case LOAD_NEWS_SUCCESS:
 	 		return state
-	 						.setIn(['entities'], arrToSet(payload.response.data, NewsModel))
-	 		 				.setIn(['loading'], false)
+	 						.set('entities', arrToSet(payload.response.data, NewsModel))
+	 		 				.set('loading', false)
 	 			
 		case LOAD_NEWS_ERROR:
 	 		return state
-	 						.setIn(['error'], payload.error)
-	 						.setIn(['loading'], false)
+	 						.set('error', payload.error)
+	 						.set('loading', false)
 	 	
 	 	case TOGGLE_OPEN_NEWS:
-			return state.setIn(['isOpen'], !state.isOpen) 
+			return state.set('isOpen', !state.isOpen) 
 	}
 
 	return state

@@ -6,26 +6,25 @@ import ErrorCmp from '../ErrorCmp'
 import DistribItem from './DistribItem'
 import DistribList from './DistribList'
 import DistribItemInfo from './DistribItemInfo'
-import {loadDistribs, entitiesSelector, loadingSelector, errorSelector} from '../../ducks/distribs'
+import {loadDistribs, entitiesSelector, loadingSelector, loadedSelector, errorSelector} from '../../ducks/distribs'
 import { DISTRIBS } from '../../config'
 import scrollToElement from 'scroll-to-element'
 
 class Distribs extends Component{
 	
-	componentDidMount(){
-		this.props.loadDistribs(DISTRIBS)
-		var elem = document.querySelector('body')
-		scrollToElement(elem)
-	}
-
 	state = {
 		openDistribId: null
 	}
 
+	componentDidMount(){
+		if(!this.props.loaded) this.props.loadDistribs(DISTRIBS)
+		
+		var elem = document.querySelector('body')
+		scrollToElement(elem)
+	}
+
 	render(){
 		const {distribs, loading, error, contacts} = this.props
-
-		console.log('props: ', this.props)
 
 		if (loading) return (<section className="about"><Loader /></section>)
 		if (error) return (<section className="about"><ErrorCmp error={error} /></section>)	
@@ -79,6 +78,7 @@ const mapStateToProps = state => {
 	return {
 		contacts: state.contacts.entities,
 		distribs: entitiesSelector(state),
+		loaded: loadedSelector(state),
 		loading: loadingSelector(state),
 		error: errorSelector(state)
 	}

@@ -18,7 +18,8 @@ export const LOAD_VENDORS_ERROR = `${prefix}/LOAD_VENDORS_ERROR`
 const ReducerState = Record({
 	entities: Map(),
 	error: null,
-	loading: true
+	loading: true,
+	loaded: false
 })
 
 export default function reducer(state = new ReducerState(), action) {
@@ -27,13 +28,15 @@ export default function reducer(state = new ReducerState(), action) {
 	switch(type){
 		case LOAD_VENDORS_SUCCESS:
 	 		return state
-	 						.setIn(['entities'], payload.response)
-	 		 				.setIn(['loading'], false)
+	 						.set('entities', payload.response)
+	 						.set('loaded', true)
+	 		 				.set('loading', false)
 	 			
 		case LOAD_VENDORS_ERROR:	
 	 		return state
-	 						.setIn(['error'], payload.error)
-	 						.setIn(['loading'], false)
+	 						.set('error', payload.error)
+	            .set('loaded', false)
+	 						.set('loading', false)
 	}
 
 	return state

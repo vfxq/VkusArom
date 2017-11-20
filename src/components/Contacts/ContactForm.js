@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, SubmissionError, reset } from 'redux-form'
-import { Input, Button, Message } from 'semantic-ui-react'
 import RenderedField from '../Forms/RenderedField'
 import {required, email, minLength3, minLength20, maxLength30, maxLength300, rusTextOnly, rusTextNumbers} from '../Forms/validate.js'
 

@@ -51,7 +51,6 @@ class Contacts extends Component{
 	}
 
 	submit = (values) => {
-		console.log("submit props: ", this.props)
 		this.props.sendForm(values)
 	}
 }
